@@ -4,7 +4,6 @@ import 'package:google_ml_kit/google_ml_kit.dart';
 class OCRService {
   final _textRecognizer = GoogleMlKit.vision.textRecognizer();
 
-  /// Reads text from an image file
   Future<String> extractTextFromImage(File imageFile) async {
     try {
       final inputImage = InputImage.fromFile(imageFile);
@@ -17,7 +16,6 @@ class OCRService {
     }
   }
 
-  /// Close ML Kit resources
   void dispose() {
     _textRecognizer.close();
   }

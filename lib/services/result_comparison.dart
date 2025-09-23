@@ -60,79 +60,14 @@ class ResultComparison {
 
  */
 
-/*
-class ResultComparison {
-  final List<String> tempMessages = [];
-  final List<String> humidityMessages = [];
 
-  /// Compare extracted image data with live API data
+class ResultComparison {
   List<String> temperatureComparison(
       Map<String, dynamic> imageData,
       Map<String, Map<String, double>> apiData,
       ) {
     List<String> messages = [];
 
-    double? givenTemp = imageData["matches"]?["temp"];
-    double? givenHumidity = imageData["matches"]?["humidity"];
-
-    if (givenTemp == null || givenHumidity == null) {
-      messages.add("No valid temperature or humidity found in imageData.");
-      return messages;
-    }
-
-    // Loop over cities from API data
-    apiData.forEach((city, data) {
-      double apiTemp = data["temp"] ?? 0;
-      double apiHumidity = data["humidity"] ?? 0;
-
-      // ---- Temperature comparison ----
-      if (givenTemp == apiTemp) {
-        tempMessages.add(
-            "Both given temperature and $city temperature are the same ($givenTemp°C).");
-      } else if (givenTemp > apiTemp) {
-        double diff = (givenTemp - apiTemp);
-        tempMessages.add(
-            "Given temperature ($givenTemp°C) is $diff°C higher than $city ($apiTemp°C).");
-      } else {
-        double diff = (apiTemp - givenTemp);
-        tempMessages.add(
-            "Given temperature ($givenTemp°C) is $diff°C lower than $city ($apiTemp°C).");
-      }
-
-      // ---- Humidity comparison ----
-      if (givenHumidity == apiHumidity) {
-        humidityMessages.add(
-            "Both given humidity and $city humidity are the same ($givenHumidity%).");
-      } else if (givenHumidity > apiHumidity) {
-        double diff = (givenHumidity - apiHumidity);
-        humidityMessages.add(
-            "Given humidity ($givenHumidity%) is $diff% higher than $city ($apiHumidity%).");
-      } else {
-        double diff = (apiHumidity - givenHumidity);
-        humidityMessages.add(
-            "Given humidity ($givenHumidity%) is $diff% lower than $city ($apiHumidity%).");
-      }
-    });
-
-    // Merge results
-    messages.addAll(tempMessages);
-    messages.addAll(humidityMessages);
-    return messages;
-  }
-}
-
-
- */
-
-class ResultComparison {
-  /// Compare extracted image data with live API data
-  List<String> temperatureComparison(
-      Map<String, dynamic> imageData,
-      Map<String, Map<String, double>> apiData,
-      ) {
-    List<String> messages = [];
-
-    // Extract lists from imageData
     final List<double> givenTemps = (imageData["temp"] as List<dynamic>? ?? [])
         .map((e) => double.tryParse(e.toString()) ?? 0.0)
         .toList();
@@ -146,17 +81,14 @@ class ResultComparison {
       return messages;
     }
 
-    // Use first humidity for comparison (usually only one)
     final double givenHumidity = givenHumidities.first;
 
-    // Loop through cities
     apiData.forEach((city, data) {
       final double apiTemp = data["temp"] ?? 0;
       final double apiHumidity = data["humidity"] ?? 0;
 
-      // Compare each extracted temp
       for (final givenTemp in givenTemps) {
-        // Temperature comparison
+
         if (givenTemp == apiTemp) {
           messages.add("Temp $givenTemp°C matches $city ($apiTemp°C).");
         } else if (givenTemp > apiTemp) {
@@ -165,7 +97,6 @@ class ResultComparison {
           messages.add("Temp $givenTemp°C is ${(apiTemp - givenTemp).toStringAsFixed(1)}°C lower than $city ($apiTemp°C).");
         }
 
-        // Humidity comparison
         if (givenHumidity == apiHumidity) {
           messages.add("Humidity $givenHumidity% matches $city ($apiHumidity%).");
         } else if (givenHumidity > apiHumidity) {
@@ -175,7 +106,6 @@ class ResultComparison {
         }
       }
     });
-    print("😒😍😍😍 hof: $messages");
     return messages;
   }
 }
