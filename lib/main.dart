@@ -1,4 +1,15 @@
 
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
+// Import your services
+import 'services/ocr_service.dart';
+import 'services/text_classifier.dart';
+import 'services/weather_service.dart';
+import 'services/result_comparison.dart';
+
+
 final OCRService _ocrService = OCRService();
 final TextClassifier _classifier = TextClassifier();
 final WeatherService _weatherService = WeatherService();
