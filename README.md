@@ -1,16 +1,40 @@
-# ocrapp
+# Instructions for Local Gradle Testing
 
-A new Flutter project.
+1. First, clone the project folder to your local disk using the command:  
+   ```bash
+   git clone https://github.com/tauhidhasan811/ocrapp.git
+   ```
 
-## Getting Started
+2. Then go to `<project-root>\android\gradle\wrapper` and set the `gradle-8.12-all` file path. There are two options:
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## Option 1: Manual Download
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Download `gradle-8.12-all.zip` from the official Gradle releases: [https://gradle.org/releases/](https://gradle.org/releases/)  
+2. Save it in a local folder, for example:  
+   ```
+   C:\<user-name>\.gradle\wrapper\dists\gradle-8.12-all.zip
+   ```
+3. Open `gradle-wrapper.properties` located at:  
+   ```
+   <project-root>\gradle\wrapper\gradle-wrapper.properties
+   ```
+4. Set the distribution URL to use the local file:  
+   ```
+   distributionUrl=file\:///C:/<user-name>/.gradle/wrapper/dists/gradle-8.12-all.zip
+   ```
+5. Run the build using:  
+   ```bash
+   gradlew.bat build
+   ```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## Option 2: Automatic Download
+
+1. Open `gradle-wrapper.properties` and keep the distribution URL as:  
+   ```
+   distributionUrl=https\://services.gradle.org/distributions/gradle-8.12-all.zip
+   ```
+2. When running `gradlew.bat build`, Gradle will automatically download the required distribution.
