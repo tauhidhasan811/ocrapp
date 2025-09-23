@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 class WeatherService {
   final String apiKey = "7bad9389c36525353b446ebc1da32438"; // Replace with your key
   final String baseUrl = "https://api.openweathermap.org/data/2.5/weather";
