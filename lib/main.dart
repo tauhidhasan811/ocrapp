@@ -102,7 +102,7 @@ class _ChatBotPageState extends State<ChatBotPage> {
       }
 
       displayText =
-      "Extracted text:\n$extractedText\n\nDetected Type: $type\nReply: $replyText\n\nComparison Between Results:\n$compareResult";
+      "Extracted text:\n$extractedText\n\nDetected Type: $type\n\nApi Response: $replyText\n\nComparison Between Results:\n$compareResult";
       print(displayText);
     }
 
